@@ -14,17 +14,17 @@ const router = createBrowserRouter([
         path:"/",element:<Home/>,
 
       },
-      // {
-      //   path:"/login",element:<Login/>
-      // },
-      // {path:"/register",element:<Register/>},
-      // {path:"/office_section",element:<OfficeSection/>}
+      {
+        path:"/login",element:<Login/>
+      },
+      {path:"/register",element:<Register/>},
+      {path:"/office_section",element:<OfficeSection/>}
     ]
     
   },
 
   {
-    path:"/fast_office_product",
+    path:"/all_services",
     element:<Dashboard/>,
     children:[
 

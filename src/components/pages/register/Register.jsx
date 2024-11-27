@@ -21,84 +21,77 @@ const Register = () => {
   };
 
   return (
-    <div className=" mt-20 px-4">
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 items-center">
-        {/* Image Section */}
-        <div className="w-full">
-          <img
-            src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-135.jpg?t=st=1710081713~exp=1710085313~hmac=f637c194f1f143e63a84950cbf978997453777c872adf4aebbbecdaa445601a1&w=740"
-            alt="register page"
-            className="w-full h-auto"
-          />
-        </div>
+    <div
+      className="flex items-center justify-center min-h-screen bg-cover bg-center"
+      style={{
+        backgroundImage: `url('https://wallpapers.com/images/hd/yellow-and-blue-background-bqfg6r5bom6fxrvm.jpg')`,
+      }}
+    >
+      <div className="bg-white/80 p-6 rounded-xl shadow-xl w-full max-w-lg backdrop-blur-sm">
+        <h1 className="text-center text-3xl font-bold text-gray-800 mb-6">
+          Register <span className="text-accent">Now</span>
+        </h1>
 
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">
+              Full Name
+            </label>
+            <input
+              type="text"
+              {...register("username", { required: "Full Name is required" })}
+              placeholder="Your Name"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent"
+            />
+            {errors.username && (
+              <p className="text-red-500 text-sm">{errors.username.message}</p>
+            )}
+          </div>
 
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">Email</label>
+            <input
+              type="email"
+              {...register("email", { required: "Email is required" })}
+              placeholder="Email Address"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm">{errors.email.message}</p>
+            )}
+          </div>
 
-        {/* Form Section */}
-        <div className="card w-full max-w-md mx-auto shadow-xl bg-base-100">
-        <h1 className="text-center text-3xl md:text-4xl">
-        Register <span className="text-accent">Now</span>
-      </h1>
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body py-5">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Full Name</span>
-              </label>
-              <input
-                type="text"
-                {...register("username", { required: "Full Name is required" })}
-                placeholder="User Name"
-                className="input input-bordered"
-              />
-              {errors.username && (
-                <p className="text-red-500 text-sm">{errors.username.message}</p>
-              )}
-            </div>
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">
+              Password
+            </label>
+            <input
+              type="password"
+              {...register("password", { required: "Password is required" })}
+              placeholder="Password"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent"
+            />
+            {errors.password && (
+              <p className="text-red-500 text-sm">{errors.password.message}</p>
+            )}
+          </div>
 
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                {...register("email", { required: "Email is required" })}
-                placeholder="Email"
-                className="input input-bordered"
-              />
-              {errors.email && (
-                <p className="text-red-500 text-sm">{errors.email.message}</p>
-              )}
-            </div>
+          <div>
+            <button
+              type="submit"
+              className="w-full py-3 bg-accent text-white font-bold rounded-lg hover:bg-accent-dark focus:ring-2 focus:ring-accent focus:outline-none"
+            >
+              Register
+            </button>
+          </div>
 
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                {...register("password", { required: "Password is required" })}
-                type="password"
-                placeholder="Password"
-                className="input input-bordered"
-              />
-              {errors.password && (
-                <p className="text-red-500 text-sm">{errors.password.message}</p>
-              )}
-            </div>
-
-            <div className="form-control mt-6">
-              <button type="submit" className="btn btn-accent btn-outline w-full">
-                Register
-              </button>
-            </div>
-            <p className="text-center mt-3">
-              Already have an account?{" "}
-              <Link className="text-accent" to="/login">
-                Login
-              </Link>
-            </p>
-          </form>
-        </div>
+          <p className="text-center text-gray-600">
+            Already have an account?{" "}
+            <Link to="/login" className="text-accent hover:underline">
+              Login
+            </Link>
+          </p>
+        </form>
       </div>
     </div>
   );

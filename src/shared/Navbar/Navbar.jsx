@@ -138,12 +138,12 @@ const Navbar = () => {
                     </details>
                   </li>
                   <li>
-                    <Link to="/fast_office_product" onClick={() => scrollToSection("our-work")}>
+                    <Link to="/all_services" onClick={() => scrollToSection("our-work")}>
                       Interview
                     </Link>
                   </li>
                   <li>
-                    <Link onClick={() => scrollToSection("services")}>
+                    <Link to="/all_service" onClick={() => scrollToSection("services")}>
                       Services{" "}
                     </Link>
                   </li>
@@ -225,7 +225,7 @@ const Navbar = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link to="/office_section" onClick={handleLinkClick}>
+                      <Link to="/all_services" onClick={handleLinkClick}>
                       Interview
                       </Link>
                     </li>
@@ -246,7 +246,7 @@ const Navbar = () => {
               <li>
                 <Link to="" onClick={() => scrollToSection("our-work")}> Interview</Link>
               </li>
-              <li>
+              <li to="/all_services">
                 <Link onClick={() => scrollToSection("services")}>
                   Services{" "}
                 </Link>

@@ -14,68 +14,64 @@ const Login = () => {
   };
 
   return (
-    <div className="my-10 mt-20">
-      <h1 className="text-center text-4xl mb-5">
-        Login <span className="text-accent">Here</span>
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <img
-            src="https://img.freepik.com/free-vector/login-concept-illustration_114360-739.jpg?t=st=1710130697~exp=1710134297~hmac=f1b21d9c1823a0657d339c256a1c4ad8301168480e35b35aeba5106568a21010&w=740"
-            alt="login page"
-            className="w-full h-[85%]"
-          />
-        </div>
+    <div
+      className="flex items-center justify-center min-h-screen bg-cover bg-center"
+      style={{
+        backgroundImage: `url('https://wallpapers.com/images/hd/yellow-and-blue-background-bqfg6r5bom6fxrvm.jpg')`,
+      }}
+    >
+      <div className="bg-white/80 p-8 rounded-xl shadow-xl w-full max-w-lg backdrop-blur-sm">
+        <h1 className="text-center text-3xl font-semibold text-gray-800 mb-6">
+          Welcome Back! <span className="text-accent">Login</span>
+        </h1>
 
-        <div className="card w-full md:w-[70%] h-[70%] shadow-xl bg-base-100 mx-auto">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-            <div className="form-control mt-5">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                {...register("email", { required: "Email is required" })}
-                placeholder="Email"
-                className="input input-bordered"
-              />
-              {errors.email && (
-                <p className="text-red-500 text-sm">{errors.email.message}</p>
-              )}
-            </div>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          <div>
+            <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              {...register("email", { required: "Email is required" })}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent"
+              placeholder="Email"
+            />
+            {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+          </div>
 
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                {...register("password", { required: "Password is required" })}
-                type="password"
-                placeholder="Password"
-                className="input input-bordered"
-              />
-              {errors.password && (
-                <p className="text-red-500 text-sm">
-                  {errors.password.message}
-                </p>
-              )}
-            </div>
+          <div>
+            <label htmlFor="password" className="block text-gray-700 font-medium mb-2">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              {...register("password", { required: "Password is required" })}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent"
+              placeholder="Password"
+            />
+            {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+          </div>
 
-            <div className="form-control mt-6">
-              <button type="submit" className="btn btn-accent btn-outline">
-                Login
-              </button>
-            </div>
-            <p className="text-center">
-              Don&apos;t have an account?{" "}
-              <Link to="/register" className="text-accent">
-                Create an account
-              </Link>
-            </p>
-          </form>
-          <p className="text-center">Or Sign Up Using</p>
-          <div className="flex justify-center mb-10 mt-2">
-            <button className="btn btn-circle">
+          <div className="flex justify-between items-center">
+            <button type="submit" className="w-full py-3 bg-accent text-white font-bold rounded-lg hover:bg-accent-dark focus:outline-none focus:ring-2 focus:ring-accent">
+              Login
+            </button>
+          </div>
+
+          <p className="text-center text-sm text-gray-600">
+            Don’t have an account?{" "}
+            <Link to="/register" className="text-accent hover:underline">
+              Create an account
+            </Link>
+          </p>
+        </form>
+
+        <div className="text-center mt-5">
+          <p className="text-gray-600">Or Sign Up Using</p>
+          <div className="flex justify-center mt-3 space-x-4">
+          <button className="btn btn-circle">
               <img
                 src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png"
                 
