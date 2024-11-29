@@ -63,7 +63,7 @@ const Banner = () => {
 
       
       <section className="relative ">
-        <div className="h-[600px] bg-cover bg-center" style={{ backgroundImage: "url('https://150506300.v2.pressablecdn.com/wp-content/uploads/2024/01/QsJobInterview_281053075-767x511-1.jpeg')" }}>
+        <div className="h-[600px] bg-cover bg-center" style={{ backgroundImage: "url('https://media.licdn.com/dms/image/C4E12AQGe0IMnU0RIWg/article-cover_image-shrink_720_1280/0/1629901226168?e=2147483647&v=beta&t=-ZO_9PDBtbeCJKOOpskY7d1DeFsysFxkPuMVrqPmhug')" }}>
           <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center">
             <h1 className="text-white text-5xl font-bold mb-4">Welcome to   Selectify</h1>
             <p className="text-white text-lg max-w-2xl mx-auto mb-6">

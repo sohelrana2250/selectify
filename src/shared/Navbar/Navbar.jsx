@@ -1,26 +1,34 @@
-
-import React, { useState,  useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 
 import { MdAutoDelete, MdOutlinePassword } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
-
+import { AuthContext } from "../../components/AuthProvider/AuthProvider";
 
 const Navbar = () => {
- 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Manage dropdown state
+
+  const { user, logOut } = useContext(AuthContext);
+
+ 
+ const handelLogOut = () => {
+    logOut()
+      .then(() => {
+        localStorage.setItem("token", null);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
  
 
-  
- 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen); // Toggle the dropdown open/close state
   };
 
-  
   const detailsRef = useRef(null);
 
   const handleLinkClick = () => {
@@ -47,12 +55,9 @@ const Navbar = () => {
     }
   };
 
-  
-
   return (
     <>
       <div className="fixed top-0 left-0 w-full z-50">
-        
         <div className="navbar bg-[#e4dfdf31] backdrop-blur-md shadow-lg">
           <div className="navbar-start">
             <div className="dropdown">
@@ -123,7 +128,7 @@ const Navbar = () => {
                             to="/licence"
                             onClick={() => setIsMenuOpen(false)}
                           >
-                            Running Company 
+                            Running Company
                           </Link>
                         </li>
                         <li>
@@ -138,15 +143,22 @@ const Navbar = () => {
                     </details>
                   </li>
                   <li>
-                    <Link to="" onClick={() => scrollToSection("our-work")}>
+                    <Link to="/interview" onClick={() => scrollToSection("our-work")}>
                       Interview
                     </Link>
                   </li>
-                  <li>
-                    <Link to="/all_services" onClick={() => scrollToSection("services")}>
-                      Services
-                    </Link>
-                  </li>
+               
+                    {user?.emailVerified && user?.email && (
+                      <li>
+                        <Link
+                          to="/all_services"
+                          onClick={() => scrollToSection("services")}
+                        >
+                          Services
+                        </Link>
+                      </li>
+                    )}
+                  
                   <li>
                     <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
                       Contact Us
@@ -167,12 +179,11 @@ const Navbar = () => {
               </div>
 
               <div className="relative inline-block text-left">
-              <div className="flex items-center">
-                 <button className="btn btn-ghost text-xl font-bold">
-                 Selectify
-                </button>
-              </div>
-
+                <div className="flex items-center">
+                  <button className="btn btn-ghost text-xl font-bold">
+                    Selectify
+                  </button>
+                </div>
 
                 {isOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
@@ -186,7 +197,7 @@ const Navbar = () => {
                         <Link
                           key={index}
                           to={`${company.path}/${index + 1}`}
-                        //   onClick={handleLinkClickCompany} // Close dropdown on link click
+                          //   onClick={handleLinkClickCompany} // Close dropdown on link click
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-b border-gray-400"
                           role="menuitem"
                         >
@@ -225,13 +236,13 @@ const Navbar = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link to="" onClick={handleLinkClick}>
-                      Interview
+                      <Link to="/interview" onClick={handleLinkClick}>
+                        Interview
                       </Link>
                     </li>
                     <li>
                       <Link to="/licence" onClick={handleLinkClick}>
-                      Running Company 
+                        Running Company
                       </Link>
                     </li>
                     <li>
@@ -244,13 +255,23 @@ const Navbar = () => {
               </li>
 
               <li>
-                <Link to="" onClick={() => scrollToSection("our-work")}> Interview</Link>
-              </li>
-              <li >
-                <Link to="/all_services" onClick={() => scrollToSection("services")}>
-                  Services
+                <Link to="/interview" onClick={() => scrollToSection("our-work")}>
+                  {" "}
+                  Interview
                 </Link>
               </li>
+         
+                {user?.emailVerified && user?.email && (
+                  <li>
+                    <Link
+                      to="/all_services"
+                      onClick={() => scrollToSection("services")}
+                    >
+                      Services
+                    </Link>
+                  </li>
+                )}
+            
 
               <li>
                 <Link to="/contact">Contact Us</Link>
@@ -259,10 +280,10 @@ const Navbar = () => {
           </div>
 
           <div className="navbar-end">
-            {isAuthenticated ? (
+            {user?.emailVerified && user?.email  ? (
               <>
                 <h1 className="text-xl mr-5">
-                  Sohel Rana
+                 {user?.displayName}
                 </h1>
                 <div className="dropdown dropdown-end">
                   <label
@@ -270,10 +291,11 @@ const Navbar = () => {
                     className="btn btn-ghost btn-circle avatar"
                   >
                     <div className="w-20 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                     
                       <img
                         className="h-10 w-10 rounded-full"
                         src={
-                           "https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"
+                           user?.photoURL===null?"https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg":user?.photoURL
                         }
                         alt="profile"
                       />
@@ -310,7 +332,7 @@ const Navbar = () => {
                     </li>
                     <li>
                       <button
-                        
+                         onClick={handelLogOut}
                         className="btn btn-error btn-outline btn-sm rounded"
                       >
                         <RiLogoutCircleRLine className="text-xl text-gray-700" />
@@ -329,22 +351,6 @@ const Navbar = () => {
                 
               </>
             )}
-            {/* {isAuthenticated ? (
-            <Link to="/profile">
-              <div className="flex gap-2 items-center mr-5">
-                <h2>{showData[0]?.name}</h2>
-                <img
-                  className="h-10 w-10 rounded-full"
-                  src={
-                    showData[0]?.profilePhoto
-                      ? showData[0]?.profilePhoto
-                      : "https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"
-                  }
-                  alt="profile"
-                />
-              </div>
-            </Link>
-          ) : null} */}
           </div>
         </div>
       </div>

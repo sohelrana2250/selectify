@@ -1,5 +1,5 @@
 // DashboardSidebar
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { TiHomeOutline } from "react-icons/ti";
@@ -7,6 +7,8 @@ import { RiAccountBoxFill} from "react-icons/ri";
 import {  MdFormatListNumbered, MdAutoDelete, MdOutlinePassword } from "react-icons/md";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+
 
 
 
@@ -15,6 +17,17 @@ const DashboardSidebar = () => {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, logOut } = useContext(AuthContext);
+
+  const handelLogOut = () => {
+    logOut()
+      .then(() => {
+        localStorage.setItem("token", null);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
   
   const detailsRef = useRef(null);
 
@@ -42,7 +55,7 @@ const DashboardSidebar = () => {
   return (
     <div className="fixed top-0 left-0 w-full z-50">
       {/* Main Navigation Bar */}
-      <div className="navbar bg-[#e4dfdf31] backdrop-blur-md shadow-lg">
+      <div className="navbar bg-[#8296ef31] backdrop-blur-md shadow-lg">
         <div className="navbar-start flex items-center">
           <FaBars 
             className="text-xl cursor-pointer " 
@@ -90,8 +103,8 @@ const DashboardSidebar = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link to="/office_section" >
-                      Office Section
+                      <Link to="/Inverview" >
+                          Interview
                       </Link>
                     </li>
                     <li>
@@ -109,10 +122,10 @@ const DashboardSidebar = () => {
               </li>
 
               <li>
-                <Link to="/fast_office_product" onClick={() => scrollToSection("our-work")}>Office Section</Link>
+                <Link to="/interview" onClick={() => scrollToSection("our-work")}>Interview</Link>
               </li>
               <li>
-                <Link onClick={() => scrollToSection("services")}>
+                <Link to="/all_services" onClick={() => scrollToSection("services")}>
                   Services
                 </Link>
               </li>
@@ -126,20 +139,23 @@ const DashboardSidebar = () => {
 
         
 
-        <div className="navbar-end flex items-center gap-2">
-        <h1 className="text-xl mr-2">
-                  Sohel Rana
+          <div className="navbar-end">
+            {user?.emailVerified && user?.email  ? (
+              <>
+                <h1 className="text-xl mr-5">
+                 {user?.displayName}
                 </h1>
-        <div className="dropdown dropdown-end">
+                <div className="dropdown dropdown-end">
                   <label
                     tabIndex={0}
                     className="btn btn-ghost btn-circle avatar"
                   >
                     <div className="w-20 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                     
                       <img
                         className="h-10 w-10 rounded-full"
                         src={
-                           "https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"
+                           user?.photoURL===null?"https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg":user?.photoURL
                         }
                         alt="profile"
                       />
@@ -176,7 +192,7 @@ const DashboardSidebar = () => {
                     </li>
                     <li>
                       <button
-                        
+                         onClick={handelLogOut}
                         className="btn btn-error btn-outline btn-sm rounded"
                       >
                         <RiLogoutCircleRLine className="text-xl text-gray-700" />
@@ -184,62 +200,44 @@ const DashboardSidebar = () => {
                     </li>
                   </ul>
                 </div>
-          
-          {/* {isAuthenticated ? (
-            <div className="dropdown dropdown-end">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-20 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                  <img
-                    className="h-10 w-10 rounded-full"
-                    src="https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"
-                    alt="profile"
-                  />
-                </div>
-              </label>
-              <ul className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                <li>
-                  <Link to="/profile" className="justify-between">
-                    <div className="flex m-1">
-                      <CgProfile className="text-xl mr-2" />
-                      <span>Profile</span>
-                    </div>
+              </>
+            ) : (
+              <>
+                
+                  <Link   to="/login" className="btn btn-ghost ">
+                    LogIn
                   </Link>
-                </li>
-                <li>
-                  <Link to="/chnage_password">
-                    <div className="flex m-1">
-                      <MdOutlinePassword className="text-xl mr-2" />
-                      <span>Change Password</span>
-                    </div>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/delete_account">
-                    <div className="flex m-1">
-                      <MdAutoDelete className="text-xl mr-2" />
-                      <span>Delete Account</span>
-                    </div>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          ) : (
-            <Link to="/login" className="btn btn-ghost">
-              LogIn
-            </Link>
-          )} */}
-        </div>
+                  
+                
+              </>
+            )}
+          </div>
       </div>
 
       {/* Sidebar */}
       <section
-        className={`fixed top-0 left-0 px-3 h-full bg-[#e4dfdf31] transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 px-3 h-full bg-[#8296ef31] transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         style={{ width: "250px", marginTop: "65px" }}
       >
-       
-        
+        <div className="py-5 flex justify-between items-center">
+        <div className="avatar">
+            <div className="w-10 h-10 rounded-full bg-white overflow-hidden p-1 ml-2">
+              <img
+                src="https://uploads.commoninja.com/searchengine/shopify/multiselect-variant-selector.png"
+                alt="Fast Office Logo"
+                className="object-contain"
+              />
+            
+            </div>
+           <p className="mt-2"> Services</p>
+          </div>
+          <FaTimes
+            className="text-xl cursor-pointer" 
+            onClick={toggleSidebar}
+          />
+        </div>
         <hr />
         <h2 className="text-xl font-bold mt-2 text-gray-500">Candidate Dashboard</h2>
         <hr className="border-gray-700 border-solid" />
