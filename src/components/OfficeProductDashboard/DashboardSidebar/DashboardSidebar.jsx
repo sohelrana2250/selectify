@@ -4,15 +4,11 @@ import { Link, NavLink } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { TiHomeOutline } from "react-icons/ti";
 import { RiAccountBoxFill} from "react-icons/ri";
-
-import { IoCreateOutline } from "react-icons/io5";
-import { MdOutlinePostAdd, MdFormatListNumbered, MdAutoDelete, MdOutlinePassword } from "react-icons/md";
-
-import { BiLogOutCircle } from "react-icons/bi";
+import {  MdFormatListNumbered, MdAutoDelete, MdOutlinePassword } from "react-icons/md";
 import { RiLogoutCircleRLine } from "react-icons/ri";
-
-
 import { CgProfile } from "react-icons/cg";
+
+
 
 
 const DashboardSidebar = () => {
@@ -56,7 +52,7 @@ const DashboardSidebar = () => {
           <div className="avatar">
             <div className="w-10 h-10 rounded-full bg-white overflow-hidden p-1 ml-2">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7n0zOg9jtsSGeRzYKN4J3HC8sr1z4vy1sIw&s"
+                src="https://uploads.commoninja.com/searchengine/shopify/multiselect-variant-selector.png"
                 alt="Fast Office Logo"
                 className="object-contain"
               />
@@ -64,7 +60,7 @@ const DashboardSidebar = () => {
           </div>
           
           <Link to="/" className="btn btn-ghost text-xl font-bold">
-            Fast Office
+          Selectify
           </Link>
 
         </div>
@@ -117,7 +113,7 @@ const DashboardSidebar = () => {
               </li>
               <li>
                 <Link onClick={() => scrollToSection("services")}>
-                  Services{" "}
+                  Services
                 </Link>
               </li>
 
@@ -242,19 +238,10 @@ const DashboardSidebar = () => {
         }`}
         style={{ width: "250px", marginTop: "65px" }}
       >
-        <div className="py-5 flex justify-between items-center">
-          <h1 className="text-xl font-bold">
-          
-            Our Services
-          </h1>
-          <FaTimes 
-            className="text-xl cursor-pointer" 
-            onClick={toggleSidebar}
-          />
-        </div>
+       
         
         <hr />
-        <h2 className="text-xl font-bold mt-2 text-gray-500">USER DASHBOARD</h2>
+        <h2 className="text-xl font-bold mt-2 text-gray-500">Candidate Dashboard</h2>
         <hr className="border-gray-700 border-solid" />
 
         <Link to="/" className="flex gap-5 mt-5 hover:bg-black hover:text-white py-3 rounded-lg px-5">
@@ -262,98 +249,98 @@ const DashboardSidebar = () => {
           <h3>Dashboard</h3>
         </Link>
 
-        {/* User Management Section */}
-        <div className="collapse group hover:bg-black hover:text-white mt-3 collapse-arrow bg-gray-100 rounded-lg shadow-lg">
-          <input type="checkbox" name="my-accordion-3" />
-          <div className="collapse-title flex items-center gap-3 font-semibold px-4 py-3">
-            <MdFormatListNumbered className="text-3xl" />
-            <h2 className="text-xl">User</h2>
-          </div>
-          <div className="collapse-content">
-            <ul className="ml-8 mt-2 space-y-3">
-              <li>
-                <NavLink
-                  to="/all_user"
-                  className="text-lg m-2 hover:text-red-500 transition duration-300"
-                  style={({ isActive }) => ({
-                    color: isActive ? "red" : "",
-                    textDecoration: isActive ? "underline" : "",
-                  })}
-                >
-                  All Users
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/all_visitor_activity"
-                  className="text-lg m-2 hover:text-red-500 transition duration-300"
-                  style={({ isActive }) => ({
-                    color: isActive ? "red" : "",
-                    textDecoration: isActive ? "underline" : "",
-                  })}
-                >
-                  All Visitors
-                </NavLink>
-              </li>
-            </ul>
-          </div>
-        </div>
+       
 
         {/* Features Section */}
         <div className="collapse group hover:bg-black hover:text-white mt-3 collapse-arrow bg-gray-100 rounded-lg shadow-lg">
           <input type="checkbox" name="my-accordion-3" />
           <div className="collapse-title flex items-center gap-3 font-semibold px-4 py-3">
             <MdFormatListNumbered className="text-3xl" />
-            <h2 className="text-xl">Features</h2>
+            <h2 className="text-xl">Jobs Markets</h2>
           </div>
           <div className="collapse-content">
             <ul className="ml-8 mt-2 space-y-3">
               <li>
                 <NavLink
-                  to="/news"
+                  to="/alljobs"
                   className="text-lg m-2 hover:text-red-500 transition duration-300"
                   style={({ isActive }) => ({
                     color: isActive ? "red" : "",
                     textDecoration: isActive ? "underline" : "",
                   })}
-                >
-                  News
+                > All Jobs
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/team"
+                  to="/interview_report"
                   className="text-lg m-2 hover:text-red-500 transition duration-300"
                   style={({ isActive }) => ({
                     color: isActive ? "red" : "",
                     textDecoration: isActive ? "underline" : "",
                   })}
                 >
-                  The Team
+                  Interview Report
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/licence"
+                  to="/jobprofile"
                   className="text-lg m-2 hover:text-red-500 transition duration-300"
                   style={({ isActive }) => ({
                     color: isActive ? "red" : "",
                     textDecoration: isActive ? "underline" : "",
                   })}
-                >
-                  Trade Licence
+                >Your Profile
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/uplode_file"
+                  to="/interviwer_list"
                   className="text-lg m-2 hover:text-red-500 transition duration-300"
                   style={({ isActive }) => ({
                     color: isActive ? "red" : "",
                     textDecoration: isActive ? "underline" : "",
                   })}
                 >
-                  Upload File
+                 Interviewer List
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+         {/* User Management Section */}
+         <div className="collapse group hover:bg-black hover:text-white mt-3 collapse-arrow bg-gray-100 rounded-lg shadow-lg">
+          <input type="checkbox" name="my-accordion-3" />
+          <div className="collapse-title flex items-center gap-3 font-semibold px-4 py-3">
+            <MdFormatListNumbered className="text-3xl" />
+            <h2 className="text-xl">Applyed Jobs</h2>
+          </div>
+          <div className="collapse-content">
+            <ul className="ml-8 mt-2 space-y-3">
+              <li>
+                <NavLink
+                  to="/apply"
+                  className="text-lg m-2 hover:text-red-500 transition duration-300"
+                  style={({ isActive }) => ({
+                    color: isActive ? "red" : "",
+                    textDecoration: isActive ? "underline" : "",
+                  })}
+                >
+                  Apply Jobs
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/Interview"
+                  className="text-lg m-2 hover:text-red-500 transition duration-300"
+                  style={({ isActive }) => ({
+                    color: isActive ? "red" : "",
+                    textDecoration: isActive ? "underline" : "",
+                  })}
+                >
+                 Interview List
                 </NavLink>
               </li>
             </ul>
@@ -364,21 +351,6 @@ const DashboardSidebar = () => {
         <Link to="/account" className="flex gap-5 mt-5 hover:bg-black hover:text-white py-3 rounded-lg px-5">
           <RiAccountBoxFill className="text-2xl" />
           <h3>Contact Details</h3>
-        </Link>
-
-        <Link to="/create_admin" className="flex gap-5 mt-5 hover:bg-black hover:text-white py-3 rounded-lg px-5">
-          <IoCreateOutline className="text-2xl" />
-          <h3>Create Admin</h3>
-        </Link>
-
-        <Link to="/careers_page" className="flex gap-5 mt-5 hover:bg-black hover:text-white py-3 rounded-lg px-5">
-          <MdOutlinePostAdd className="text-2xl" />
-          <h3>Careers</h3>
-        </Link>
-
-        <Link to="/chnage_password" className="flex gap-5 mt-5 hover:bg-black hover:text-white py-3 rounded-lg px-5">
-          <MdOutlinePassword className="text-2xl" />
-          <h3>Change Password</h3>
         </Link>
       </section>
     </div>

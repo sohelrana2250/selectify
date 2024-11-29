@@ -55,12 +55,12 @@ const Login = () => {
           </div>
 
           <div className="flex justify-between items-center">
-            <button type="submit" className="w-full py-3 bg-accent text-white font-bold rounded-lg hover:bg-accent-dark focus:outline-none focus:ring-2 focus:ring-accent">
+            <button type="submit" className="w-full py-3 bg-gray-900 text-white font-bold rounded-lg hover:bg-accent-dark focus:outline-none focus:ring-2 focus:ring-accent">
               Login
             </button>
           </div>
 
-          <p className="text-center text-sm text-gray-600">
+          <p className="text-center  text-sm text-gray-600">
             Don’t have an account?{" "}
             <Link to="/register" className="text-accent hover:underline">
               Create an account
