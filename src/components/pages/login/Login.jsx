@@ -20,7 +20,7 @@ const Login = () => {
   const [login, setLogain] = useState(false);
   const [error, setError] = useState(null);
 
-  const { signIn, googleLogin } = useContext(AuthContext);
+  const { signIn, googleLogin,githubLogin } = useContext(AuthContext);
 
   const [deviceInfo, setDeviceInfo] = useState({});
   useEffect(() => {
@@ -96,8 +96,7 @@ const Login = () => {
             device:deviceInfo?.device?.type,
           }
 
-          console.log(user);
-          console.log( userDetails)
+          
 
              fetch(
               "https://selectify-server.vercel.app/api/v1/user/",
@@ -140,6 +139,18 @@ const Login = () => {
         setError(error.message);
       });
   };
+
+  const handelGithhubSingIn=async()=>{
+    //https://github.com/settings/applications/2795521
+    try {
+      // Assuming githubLogin() is an async function that handles GitHub login
+      const result = await githubLogin();
+      const user = result.user;
+      console.log(user); // Log the user object to the console
+    } catch (error) {
+      console.error(error); // Use console.error to log the error
+    }
+  }
 
   return (
     <>
@@ -225,7 +236,7 @@ const Login = () => {
                 alt="google logo"
               />
             </button>
-            <button className="btn btn-circle">
+            <button onClick={handelGithhubSingIn} className="btn btn-circle">
               <img
                 src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
                 width={35}

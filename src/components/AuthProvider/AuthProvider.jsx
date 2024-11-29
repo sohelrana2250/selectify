@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import {
   GoogleAuthProvider,
+  GithubAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
@@ -22,6 +23,7 @@ export const AuthContext = createContext();
 const auth = getAuth(app);
 
 const GoogleProvider = new GoogleAuthProvider();
+const GithubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
   //   const [finalProduct, setFinalProduct] = useState([]);
@@ -45,6 +47,11 @@ const AuthProvider = ({ children }) => {
   const googleLogin = () => {
     return signInWithPopup(auth, GoogleProvider);
   };
+
+  const githubLogin=()=>{
+   
+    return signInWithPopup(auth,GithubProvider);
+  }
 
   const UpdatePassword = async (currentPassword, newPassword) => {
     const user = auth.currentUser;
@@ -102,6 +109,7 @@ const AuthProvider = ({ children }) => {
     logOut,
     ResetPassword,
     DeleteAccount,
+    githubLogin
   };
   return (
     <div>
