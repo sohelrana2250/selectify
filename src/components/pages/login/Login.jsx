@@ -4,10 +4,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import DeviceDetector from "device-detector-js";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-
+import axios from 'axios';
 
 
 const Login = () => {
+
+  
   const {
     register,
     handleSubmit,
@@ -148,7 +150,8 @@ const Login = () => {
       const user = result.user;
       console.log(user); // Log the user object to the console
     } catch (error) {
-      console.error(error); // Use console.error to log the error
+
+      
     }
   }
 
