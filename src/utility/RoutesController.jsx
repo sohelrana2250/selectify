@@ -30,6 +30,11 @@ const RoutesController = () => {
                   name: "Interview List",
                   path: "/interviwer_list",
                 },
+                {
+                  icon:"",
+                  name:"Apply Company",
+                  path:"/all_services/post_jobs_recuritments"
+                }
               ],
             },
             {

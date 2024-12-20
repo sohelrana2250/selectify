@@ -12,6 +12,10 @@ import Chnagepassword from "../components/pages/ChangePassword/Chnagepassword";
 import DeleteAccount from "../components/pages/DeleteAccount/DeleteAccount";
 import Profile from "../components/pages/Profile/Profile";
 import Forgetpassword from "../components/pages/Forget/Forgetpassword";
+import UplodeCV from "../components/OfficeProductDashboard/UplodeCV/UplodeCV";
+import Subscription from "../components/pages/subscription/Subscription";
+import CompanyValidation from "../components/pages/CompanyValidation/CompanyValidation";
+import JobsRecuritments from "../components/OfficeProductDashboard/JobsRecuritments/JobsRecuritments";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -55,6 +59,24 @@ const router = createBrowserRouter([
       {
         path:"/forget_password",
         element:<Forgetpassword/>
+      },
+      {
+        path:"/subscription_details/:subscriptionId",
+        element:<PrivateRoute>
+          <Subscription/>
+        </PrivateRoute>
+
+      },
+      {
+        path:"/companyvarification",
+        element:<PrivateRoute>
+          <CompanyValidation/>
+        </PrivateRoute>
+
+      },
+      {
+        path:"/uplode_cv",
+        element:<UplodeCV/>
       }
     ],
   },
@@ -66,7 +88,12 @@ const router = createBrowserRouter([
         <Dashboard />
       </PrivateRoute>
     ),
-    children: [],
+    children: [
+      {path:"",element:""},
+      {path:"/all_services/post_jobs_recuritments",element:<PrivateRoute>
+        <JobsRecuritments/>
+      </PrivateRoute>}
+    ],
   },
 ]);
 

@@ -245,7 +245,7 @@ const DashboardSidebar = () => {
 
       {/* Sidebar */}
       <section
-        className={`fixed top-0 left-0 px-3 h-full bg-[#8296ef31] transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 px-3 h-full bg-gray-100 transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         style={{ width: "250px", marginTop: "65px" }}

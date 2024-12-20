@@ -12,6 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 import { TypeOfImage } from "../../../utility/TypesOfImages";
 import GenerateImage from "../../CommonAction/GenerateImage";
 import { BsBrowserChrome } from "react-icons/bs";
+import Loading from "../../../shared/Loading/Loading";
 
 const Profile = () => {
   const { user, updateUserProfile } = useContext(AuthContext);
@@ -111,7 +112,7 @@ const Profile = () => {
   };
 
   if (isLoading) {
-    return <div className="text-center">Loading...</div>;
+    return <Loading/>
   }
 
   if (error) {
