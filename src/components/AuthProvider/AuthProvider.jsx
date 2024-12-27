@@ -30,6 +30,7 @@ const AuthProvider = ({ children }) => {
 
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [transactionId,setTransactionId]=useState('');
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -109,7 +110,9 @@ const AuthProvider = ({ children }) => {
     logOut,
     ResetPassword,
     DeleteAccount,
-    githubLogin
+    githubLogin,
+    transactionId,
+    setTransactionId
   };
   return (
     <div>

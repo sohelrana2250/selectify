@@ -1,4 +1,4 @@
-const PostAction = async(url, selectedSpecialties, refetch) => {
+const PostAction = async(url, selectedSpecialties) => {
 
     const result= await fetch(url, {
         method: "POST",
@@ -9,7 +9,7 @@ const PostAction = async(url, selectedSpecialties, refetch) => {
         body: JSON.stringify(selectedSpecialties),
       });
       const data=await result.json();
-      refetch();
+     
       
       return data;
 };

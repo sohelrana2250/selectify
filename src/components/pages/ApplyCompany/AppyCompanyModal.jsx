@@ -47,8 +47,7 @@ const AppyCompanyModal = ({ subscriptionmodelId, refetch }) => {
       `${
         import.meta.env.VITE_COMMON_ROOT_API
       }/api/v1/company_apply/create_companyapply`,
-      companyData,
-      refetch
+      companyData 
     );
     document.getElementById("apply_company_modal").close();
     if (respone?.errorSources?.length >= 1) {

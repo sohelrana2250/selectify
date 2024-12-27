@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
 import Loading from "../../../shared/Loading/Loading";
 import ErrorPage from "../../../shared/ErrorPage/ErrorPage";
 import {
@@ -12,9 +12,12 @@ import {
   Check,
 } from "lucide-react";
 import SubscriptionNotFound from "./SubscriptionNotFound";
+import PostAction from "../../CommonAction/PostAction";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+
 
 const JobsRecuritments = () => {
-  // http://localhost:3025/api/v1/company_apply/my_subscription_company
   const {
     data: my_subscription = [],
     isLoading,
@@ -50,9 +53,22 @@ const JobsRecuritments = () => {
   }
 
   //   console.log(my_subscription?.data);
-  const handelPaymentDetails = (id, payment_details) => {
-    console.log(payment_details);
-    console.log(id);
+  const handelPaymentDetails =async (id, payment_details) => {
+   
+
+    const respone=await PostAction(`${import.meta.env.VITE_COMMON_ROOT_API}/api/v1/payment/create_payment/${id}`,payment_details);
+    if (respone?.errorSources?.length >= 1) {
+      toast.error(respone?.message);
+    }
+    else{
+      if(respone?.success ){
+        localStorage.setItem(`${import.meta.env.VITE_TRANSACTIONID}`,respone?.data?.transactionId);
+        window.location.replace(respone?.data?.paymentUrl);
+      }
+    }
+
+    //http://localhost:3025/api/v1/payment/create_payment/675fac5e3ce4bc2248d47ed7
+
   };
 
   return (
@@ -190,8 +206,17 @@ const JobsRecuritments = () => {
                       </div>
                     </div>
                   </div>
-                  {sub?.isVerified && (
-                    <div className="flex justify-center">
+                  {sub?.isVerified && 
+                    <>
+                      {
+                      sub?.isVerified? <div className="flex justify-center">
+                      <Link
+                       
+                        className="btn w-full bg-gradient-to-r from-blue-200 to-blue-800 hover:from-blue-300 hover:to-blue-900 transform hover:scale-105 transition-all duration-300"
+                      >
+                       Start Job Recuritment
+                      </Link>
+                    </div>: <div className="flex justify-center">
                       <button
                         disabled={sub?.payment}
                         onClick={() =>
@@ -200,6 +225,7 @@ const JobsRecuritments = () => {
                             email: sub?.email,
                             address: sub?.address,
                             amount: Number(sub?.subscriptionmodelId?.price),
+                            contractNumber:sub?.phonenumber
                           })
                         }
                         className="btn w-full bg-gradient-to-r from-blue-200 to-blue-800 hover:from-blue-300 hover:to-blue-900 transform hover:scale-105 transition-all duration-300"
@@ -207,7 +233,9 @@ const JobsRecuritments = () => {
                         Buy Now
                       </button>
                     </div>
-                  )}
+                      }
+                    </>
+                  }
                 </div>
               ))}
           </div>

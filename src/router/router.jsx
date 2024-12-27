@@ -16,6 +16,9 @@ import UplodeCV from "../components/OfficeProductDashboard/UplodeCV/UplodeCV";
 import Subscription from "../components/pages/subscription/Subscription";
 import CompanyValidation from "../components/pages/CompanyValidation/CompanyValidation";
 import JobsRecuritments from "../components/OfficeProductDashboard/JobsRecuritments/JobsRecuritments";
+import { PaymentStatus } from "../components/OfficeProductDashboard/JobsRecuritments/PaymentStatus";
+import AllCompanyList from "../components/OfficeProductDashboard/Admin/AllCompanyList/AllCompanyList";
+import SpecificCompanyList from "../components/OfficeProductDashboard/Admin/AllCompanyList/SpecificCompanyList";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -77,6 +80,12 @@ const router = createBrowserRouter([
       {
         path:"/uplode_cv",
         element:<UplodeCV/>
+      },
+      {
+        path:"/payment",
+        element:<PrivateRoute>
+          <PaymentStatus/>
+        </PrivateRoute>
       }
     ],
   },
@@ -92,6 +101,12 @@ const router = createBrowserRouter([
       {path:"",element:""},
       {path:"/all_services/post_jobs_recuritments",element:<PrivateRoute>
         <JobsRecuritments/>
+      </PrivateRoute>},
+      {path:"/all_services/all_apply_company",element:<PrivateRoute>
+        <AllCompanyList/>
+      </PrivateRoute>},
+      {path:"/all_services/specific_company_list/:id",element:<PrivateRoute>
+        <SpecificCompanyList/>
       </PrivateRoute>}
     ],
   },
