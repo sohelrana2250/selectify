@@ -1,18 +1,16 @@
+import React from "react";
 import ErrorPage from "../../shared/ErrorPage/ErrorPage";
 
-
-
-const PostAction = async (url, selectedSpecialties) => {
+const DeleteAction = async (url, refetch) => {
   try {
     const result = await fetch(url, {
-      method: "POST",
+      method: "DELETE",
       headers: {
-        "content-type": "application/json",
         authorization: `${localStorage.getItem("token")}`,
       },
-      body: JSON.stringify(selectedSpecialties),
     });
     const data = await result.json();
+    refetch();
 
     return data;
   } catch (error) {
@@ -22,4 +20,4 @@ const PostAction = async (url, selectedSpecialties) => {
   }
 };
 
-export default PostAction;
+export default DeleteAction;

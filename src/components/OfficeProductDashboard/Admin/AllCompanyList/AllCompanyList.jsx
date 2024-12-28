@@ -60,6 +60,11 @@ const AllCompanyList = () => {
     setSpecificCompanyId(id);
   }
 
+  const handelDeleteSpecificCompany=(companyId)=>{
+
+    
+  }
+
   return (
     <>
     <div className="min-h-screen">
@@ -214,7 +219,7 @@ const AllCompanyList = () => {
                     <Edit className="w-4 h-4" />
                     <span>Update</span>
                   </button>
-                  <button className="btn btn-sm btn-outline flex items-center space-x-1 text-red-600">
+                  <button onClick={()=>handelDeleteSpecificCompany(company?._id)} className="btn btn-sm btn-outline flex items-center space-x-1 text-red-600">
                     <Trash className="w-4 h-4" />
                     <span>Delete</span>
                   </button>

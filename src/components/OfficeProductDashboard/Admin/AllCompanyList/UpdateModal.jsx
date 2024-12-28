@@ -75,11 +75,11 @@ const UpdateModal = ({ specific_companyId,refetch }) => {
         <div className="modal-box">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+            <button className="btn btn-sm btn-outline btn-error bg-black absolute right-2 top-2">
               ✕
             </button>
           </form>
-          <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+          <div className="max-w-2xl mx-auto p-6 w-full bg-gradient-to-br from-white/30 to-green-600/30  shadow-lg rounded-lg">
             <h2 className="text-2xl font-semibold text-center mb-4">
               Company Information
             </h2>

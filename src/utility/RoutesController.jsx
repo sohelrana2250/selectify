@@ -34,7 +34,8 @@ const RoutesController = () => {
                   icon:"",
                   name:"Apply Company",
                   path:"/all_services/post_jobs_recuritments"
-                }
+                },
+               
               ],
             },
             {
@@ -70,7 +71,7 @@ const RoutesController = () => {
         {
           categorie: [
             {
-              categorie_name: "Jobs Markets",
+              categorie_name: "Admin Access",
               categorie_routes: [
                 {
                   icon: "",
@@ -82,16 +83,17 @@ const RoutesController = () => {
                   name: "Your Profile",
                   path: "/jobprofile",
                 },
-                {
-                  icon: "",
-                  name: "Interview List",
-                  path: "/interviwer_list",
-                },
+                
                 {
                   icon:"",
                   name:"Apply Company",
                   path:"/all_services/all_apply_company"
-                }
+                },
+                {
+                  icon: "",
+                  name: "All Payment List",
+                  path: "/all_services/all_payment_list",
+                },
               ],
             },
             {

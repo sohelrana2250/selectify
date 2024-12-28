@@ -14,10 +14,10 @@ import {
 import SubscriptionNotFound from "./SubscriptionNotFound";
 import PostAction from "../../CommonAction/PostAction";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 
 const JobsRecuritments = () => {
+  const navigate = useNavigate();
   const {
     data: my_subscription = [],
     isLoading,
@@ -53,22 +53,29 @@ const JobsRecuritments = () => {
   }
 
   //   console.log(my_subscription?.data);
-  const handelPaymentDetails =async (id, payment_details) => {
-   
-
-    const respone=await PostAction(`${import.meta.env.VITE_COMMON_ROOT_API}/api/v1/payment/create_payment/${id}`,payment_details);
+  const handelPaymentDetails = async (id, payment_details) => {
+    const respone = await PostAction(
+      `${
+        import.meta.env.VITE_COMMON_ROOT_API
+      }/api/v1/payment/create_payment/${id}`,
+      payment_details
+    );
     if (respone?.errorSources?.length >= 1) {
       toast.error(respone?.message);
-    }
-    else{
-      if(respone?.success ){
-        localStorage.setItem(`${import.meta.env.VITE_TRANSACTIONID}`,respone?.data?.transactionId);
+    } else {
+      if (respone?.success) {
+        localStorage.setItem(
+          `${import.meta.env.VITE_TRANSACTIONID}`,
+          respone?.data?.transactionId
+        );
         window.location.replace(respone?.data?.paymentUrl);
       }
     }
+  };
 
-    //http://localhost:3025/api/v1/payment/create_payment/675fac5e3ce4bc2248d47ed7
-
+  const handelRedirectRecuritment = (companyId) => {
+     localStorage.setItem(import.meta.env.VITE_COMPANY_ID,companyId);
+     navigate(`/all_services/user_recuritment_navbar?v=${companyId}`);
   };
 
   return (
@@ -206,36 +213,38 @@ const JobsRecuritments = () => {
                       </div>
                     </div>
                   </div>
-                  {sub?.isVerified && 
+                  {sub?.isVerified && (
                     <>
-                      {
-                      sub?.isVerified? <div className="flex justify-center">
-                      <Link
-                       
-                        className="btn w-full bg-gradient-to-r from-blue-200 to-blue-800 hover:from-blue-300 hover:to-blue-900 transform hover:scale-105 transition-all duration-300"
-                      >
-                       Start Job Recuritment
-                      </Link>
-                    </div>: <div className="flex justify-center">
-                      <button
-                        disabled={sub?.payment}
-                        onClick={() =>
-                          handelPaymentDetails(sub?._id, {
-                            name: sub?.companyname,
-                            email: sub?.email,
-                            address: sub?.address,
-                            amount: Number(sub?.subscriptionmodelId?.price),
-                            contractNumber:sub?.phonenumber
-                          })
-                        }
-                        className="btn w-full bg-gradient-to-r from-blue-200 to-blue-800 hover:from-blue-300 hover:to-blue-900 transform hover:scale-105 transition-all duration-300"
-                      >
-                        Buy Now
-                      </button>
-                    </div>
-                      }
+                      {sub?.isVerified ? (
+                        <div className="flex justify-center">
+                          <button
+                            onClick={() => handelRedirectRecuritment(sub?._id)}
+                            className="btn w-full bg-gradient-to-r from-blue-200 to-blue-800 hover:from-blue-300 hover:to-blue-900 transform hover:scale-105 transition-all duration-300"
+                          >
+                            Start Job Recuritment
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="flex justify-center">
+                          <button
+                            disabled={sub?.payment}
+                            onClick={() =>
+                              handelPaymentDetails(sub?._id, {
+                                name: sub?.companyname,
+                                email: sub?.email,
+                                address: sub?.address,
+                                amount: Number(sub?.subscriptionmodelId?.price),
+                                contractNumber: sub?.phonenumber,
+                              })
+                            }
+                            className="btn w-full bg-gradient-to-r from-blue-200 to-blue-800 hover:from-blue-300 hover:to-blue-900 transform hover:scale-105 transition-all duration-300"
+                          >
+                            Buy Now
+                          </button>
+                        </div>
+                      )}
                     </>
-                  }
+                  )}
                 </div>
               ))}
           </div>
